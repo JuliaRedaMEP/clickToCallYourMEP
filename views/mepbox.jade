@@ -9,9 +9,8 @@ block content
       p#mepcountry
       p#mepparty
       p#mepgroup
-      p#mepphone
+      p
+        a#mepphone(href='tel:')
       form(id='contactForm', role='form')
-        input(type='tel', id='phoneNumber', placeholder='Enter your number…', required)
-        button(type='submit', id='phoneButton') …and call your MEP free of charge!
-
-  p#about This tool runs on <a href="https://github.com/burnoutberni/clickToCallYourMEP" target="_blank">clickToCallYourMEP</a>, made with <3 by <a href="http://nini.su" target="_blank">Bernhard Hayden</a>. Fork it on <a href="https://github.com/burnoutberni/clickToCallYourMEP" target="_blank">Github</a>.
+        input(type='tel', id='phoneNumber', placeholder='Enter your own number…', required)
+        button(type='submit', id='phoneButton') Connect me to my MEP for free
