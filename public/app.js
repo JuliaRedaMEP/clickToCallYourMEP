@@ -1,10 +1,11 @@
 function renderInfo(mep) {
   document.getElementById('mepphoto').style.backgroundImage = "none";
   document.getElementById('mepphoto').style.backgroundImage = "url(" + mep.photo || "http://www.europarl.europa.eu/mepphoto/undefined.jpg" + ")";
-  document.getElementById('mepcountry').innerHTML = "<p>" + mep.country + "</p>";
-  document.getElementById('mepparty').innerHTML = "<p>" + mep.party + "</p>";
-  document.getElementById('mepgroup').innerHTML = "<p>" + mep.group + "</p>";
-  document.getElementById('mepphone').innerHTML = "<p>" + mep.phone + "</p>";
+  document.getElementById('mepcountry').innerHTML = mep.country;
+  document.getElementById('mepparty').innerHTML = mep.party;
+  document.getElementById('mepgroup').innerHTML = mep.group;
+  document.getElementById('mepphone').innerHTML = mep.phone;
+  document.getElementById('mepphone').href = 'tel:'+mep.phone;
 };
 
 function get(url, success) {
