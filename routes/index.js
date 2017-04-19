@@ -96,22 +96,23 @@ module.exports = function(app) {
     });
 
     app.get('/meps', function(request, response) {
-        var filteredMepArray = mepArray.slice();
+        var filteredMepArray = [];
 
+        var country = group = party = committee = '';
         if (request.query.country) { var country = request.query.country; }
         if (request.query.group) { var group = request.query.group; }
         if (request.query.party) { var party = request.query.party; }
         if (request.query.committee) { var committee = request.query.committee; }
 
-        for (var i = filteredMepArray.length - 1; i >= 0; i--) {
-            var filteredMep = filteredMepArray[i];
-            if ((country && encodeURIComponent(filteredMep.country.toLowerCase()) !== encodeURIComponent(country.toLowerCase())) ||
-                (group && encodeURIComponent(filteredMep.group.toLowerCase()) !== encodeURIComponent(group.toLowerCase())) ||
-                (party && encodeURIComponent(filteredMep.party.toLowerCase()) !== encodeURIComponent(party.toLowerCase())) ||
-                (committee && encodeURIComponent(filteredMep.committees.join(',').toLowerCase()).search(encodeURIComponent(committee.toLowerCase())))
+        for (var mepIndex in mepArray) {
+            var filteredMep = mepArray[mepIndex];
+            if ((!country || encodeURIComponent(filteredMep.country.toLowerCase()) == encodeURIComponent(country.toLowerCase())) &&
+                (!group || encodeURIComponent(filteredMep.group.toLowerCase()) == encodeURIComponent(group.toLowerCase())) &&
+                (!party || encodeURIComponent(filteredMep.party.toLowerCase()) == encodeURIComponent(party.toLowerCase())) &&
+                (!committee || encodeURIComponent(filteredMep.committees.join(',').toLowerCase()).search(encodeURIComponent(committee.toLowerCase())) >= 0)
                 ) {
-                filteredMepArray.splice(i, 1);
-            }
+                filteredMepArray.push(filteredMep);
+            }            
         }
 
         response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
