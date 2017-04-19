@@ -5,7 +5,7 @@ function renderInfo(mep) {
   document.getElementById('mepparty').innerHTML = mep.party;
   document.getElementById('mepgroup').innerHTML = mep.group;
   document.getElementById('mepphone').innerHTML = mep.phone;
-  document.getElementById('mepphone').href = 'tel:'+mep.phone;
+  document.getElementById('mepphone').href = 'tel:'+encodeURIComponent(mep.phone);
 };
 
 function get(url, success) {
